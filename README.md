@@ -1,7 +1,17 @@
 # AGVs-BT-Move_base_flex
 In this repo, i will develop and work on Behavier Tree C++, Move_base_flex and solve the aborted situation during navigation base on python and C++
 
+If you like the project give me a star! :star: 
 
+You can see the video: &nbsp;&nbsp;
+[![website](./img/youtube-dark.svg)](https://www.youtube.com/channel/UCyRBig4xgAdaRdIz14Xymrg)
+&nbsp;&nbsp;
+---
+
+### This package checked on below systems :
+- Ubuntu Focal
+- ROS Noetic 
+- Gazebo11 & TurtleBot3
 
 
 ## Behavior Tree 
