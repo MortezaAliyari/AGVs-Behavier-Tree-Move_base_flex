@@ -12,6 +12,7 @@ You can see the video: &nbsp;&nbsp;
 - Ubuntu Focal
 - ROS Noetic 
 - Gazebo11 & TurtleBot3
+- BT C++
 
 
 ## Behavior Tree 
