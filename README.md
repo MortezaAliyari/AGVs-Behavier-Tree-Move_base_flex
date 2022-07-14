@@ -13,11 +13,13 @@ You can see the video: &nbsp;&nbsp;
 - ROS Noetic 
 - Gazebo11 & TurtleBot3
 - BT C++
-- Groo- Cmake 3.20
+- Groot
+- Cmake 3.20
 
 
 ## Behavior Tree 
-Behavior trees actually began in the videogame industry to define behaviors for non-player characters (NPCs): Both Unreal Engine and Unity (two major forces in this space) have dedicated tools for authoring BTs. This is no surprise; a big advantage of BTs is that they are easy to compose and modify, even at runtime. However, this sacrifices the ease of designing reactive behaviors (for example, mode switches) compared to some of the other abstractions, as you will see later in this repo.
+[Behavior Trees](https://github.com/BehaviorTree/BehaviorTree.CPP)
+actually began in the videogame industry to define behaviors for non-player characters (NPCs): Both Unreal Engine and Unity (two major forces in this space) have dedicated tools for authoring BTs. This is no surprise; a big advantage of BTs is that they are easy to compose and modify, even at runtime. However, this sacrifices the ease of designing reactive behaviors (for example, mode switches) compared to some of the other abstractions, as you will see later in this repo.
 ### Install BTC++ on ROS1 or ROS2 as follows:
 ``` 
 sudo apt-get install ros-$ROS_DISTRO-behaviortree-cpp-v3 
