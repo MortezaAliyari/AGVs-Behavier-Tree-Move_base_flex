@@ -12,11 +12,16 @@ You can see the video: &nbsp;&nbsp;
 - Ubuntu Focal
 - ROS Noetic 
 - Gazebo11 & TurtleBot3
+- Move base Flex or MBF
 - BT C++
 - Groot
 - Cmake 3.20
+## Move Base Flex
 
-
+[Move Base Flex](https://uos.github.io/mbf_docs/installation/) install this package to avoid navigation abort or crash during tracking planed path.
+```
+sudo apt install ros-noetic-move-base-flex
+```
 ## Behavior Tree 
 [Behavior Trees](https://github.com/BehaviorTree/BehaviorTree.CPP)
 actually began in the videogame industry to define behaviors for non-player characters (NPCs): Both Unreal Engine and Unity (two major forces in this space) have dedicated tools for authoring BTs. This is no surprise; a big advantage of BTs is that they are easy to compose and modify, even at runtime. However, this sacrifices the ease of designing reactive behaviors (for example, mode switches) compared to some of the other abstractions, as you will see later in this repo.
