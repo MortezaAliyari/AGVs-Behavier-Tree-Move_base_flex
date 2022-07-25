@@ -54,5 +54,5 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
    ```
    it should work now.
 ## Run SLAM and Navigation algorithms simultaneously for turtlebot3.
-If we be able to run both algorithms to execute indepently,we wouldn't need to kill any node during transition between navigation to creating map method.
-It seems we should download the source file of each algorithm as package and install them on our catkin workspace.
+If we be able to run both algorithms to execute independently, we wouldn't need to kill any node during the transition from navigation to creating the map method.
+It seems we should download the source file of each algorithm as a package and install them on our catkin workspace.
