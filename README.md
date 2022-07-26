@@ -62,3 +62,8 @@ https://github.com/ros-perception/slam_gmapping.git
 ```
 then you need to change `slam_gmapping.cpp` node file.
 make a new launch file inside the launch folder same as mine which uploaded in this repo.
+`slam_gmapping_cleaner.launch`
+if you want to cancel the map frame broadcasting you need to change the `  private_nh_.param("transform_publish_period", transform_publish_period_, 0.05);
+` to zero.
+`  private_nh_.param("transform_publish_period", transform_publish_period_, 0.0);
+`
