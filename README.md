@@ -56,3 +56,8 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
 ## Run SLAM and Navigation algorithms simultaneously for turtlebot3.
 If we be able to run both algorithms to execute independently, we wouldn't need to kill any node during the transition from navigation to creating the map method.
 It seems we should download the source file of each algorithm as a package and install them on our catkin workspace.
+source code of gmapping algorithm could be downaload from below github accout. last branch of this repo relate to melodic version.
+```
+https://github.com/ros-perception/slam_gmapping.git
+```
+then you need to change `slam_gmapping.cpp` node file.
