@@ -67,3 +67,12 @@ if you want to cancel the map frame broadcasting you need to change the `  priva
 ` to zero.
 `  private_nh_.param("transform_publish_period", transform_publish_period_, 0.0);
 `
+now everthing is working just the final result in map doesn't publish any more. so the navigation algorithm can use another map frame which is publishing by amcl node file.
+if you want to cancel the map frame broadcasting fron inside the amcl node you need to change `amcl_node,cpp`
+```
+        if (a12==1){
+            this->tfb_->sendTransform(tmp_tf_stamped);
+            sent_first_transform_ = true;
+        }
+        
+```
