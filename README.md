@@ -61,3 +61,4 @@ source code of gmapping algorithm could be downaload from below github accout. l
 https://github.com/ros-perception/slam_gmapping.git
 ```
 then you need to change `slam_gmapping.cpp` node file.
+make a new launch file inside the launch folder same as mine which uploaded in this repo.
