@@ -76,4 +76,4 @@ if you want to cancel the map frame broadcasting fron inside the amcl node you n
         }
         
 ```
-In order to cancel the broadcasting map frame id by gmapping node just replace the `slam_gmapping.cpp` nad its header `slam_gmapping.h` in your source file in your slam package.
+In order to cancel the broadcasting map frame id by gmapping node just replace the `slam_gmapping.cpp` and its header `slam_gmapping.h` in your source file in your slam package.
