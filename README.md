@@ -84,8 +84,8 @@ add packages and change the folders name to `mbf_advanced` and `mbf_beginner` an
 ## Code Explanation
 In this project we consider four different locations from the map. After reaching to each location robot will enable specific function. the last location would be same as first one as home location.
 the coordinate of locations will be write in the yamle file and like dictionary in python(key/value).
-`   std::string yaml_file;
+```  std::string yaml_file;
     ros::param::get("location_file", yaml_file);
     YAML::Node locations = YAML::LoadFile(yaml_file);
     int num_locs = locations.size();
-    `
+  ```
