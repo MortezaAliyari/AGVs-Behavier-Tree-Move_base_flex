@@ -82,4 +82,5 @@ Use [MBF](https://uos.github.io/mbf_docs/tutorials/beginner/basic_navigation/) t
 rosdep install will fail for eband_local_planner, because the team hasn't released the version for noetic yet. Simply donwload and add eband_local_planner to your workspace in src folder.
 add packages and change the folders name to `mbf_advanced` and `mbf_beginner` and `eband_local planner`
 ## Code Explanation
-
+In this project we consider four different locations from the map. After reaching to each location robot will enable specific function. the last location would be same as first one as home location.
+the coordinate of locations will be write in the yamle file and like dictionary in python(key/value).
