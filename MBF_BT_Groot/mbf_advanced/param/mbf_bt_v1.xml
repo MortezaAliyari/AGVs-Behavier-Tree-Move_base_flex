@@ -1,0 +1,23 @@
+ <root main_tree_to_execute = "MainTree" >
+    <BehaviorTree ID="MainTree">
+        <Sequence name="root">
+            <Sequence name="search_location1">
+                <GoToPose       name="Home_to_loc1"   />
+                <LookForObject  name="look_in_location1"/>
+            </Sequence>
+            <Sequence name="search_location2">
+                <GoToPose       name="loc1_to_loc2" />
+                <LookForObject  name="look_in_location2"/>
+            </Sequence>
+            <Sequence name="search_location3">
+                <GoToPose       name="loc2_to_loc3" />
+                <LookForObject  name="look_in_location3"/>
+            </Sequence>
+            <Sequence name="search_location3">
+                <GoToPose       name="loc3_to_Home" />
+                <LookForObject  name="look_in_location4"/>
+            </Sequence>
+            
+        </Sequence>
+    </BehaviorTree>
+ </root>
