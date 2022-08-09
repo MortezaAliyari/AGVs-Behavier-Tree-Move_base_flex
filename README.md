@@ -167,3 +167,15 @@ private:
     std::shared_ptr<mbf_advanced::MBFCircleClient> mbfclient_;
 };
 ```
+inside the main function add below code:
+```
+    ros::init(argc, argv, "mbf_bt_v1");
+    ros::NodeHandle n;
+
+    auto mbfclient = std::make_shared<mbf_advanced::MBFCircleClient>(std::move(mbf_advanced::loadPoseGoals(POSE_PATH2)));
+
+    BT::BehaviorTreeFactory factory;
+    factory.registerNodeType<GoToPose>("GoToPose");
+    factory.registerNodeType<LookForObject>("LookForObject");
+    auto tree = factory.createTreeFromFile(BT_XML_PATH2);
+```
