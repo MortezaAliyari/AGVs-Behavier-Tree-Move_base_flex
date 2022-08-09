@@ -179,3 +179,26 @@ inside the main function add below code:
     factory.registerNodeType<LookForObject>("LookForObject");
     auto tree = factory.createTreeFromFile(BT_XML_PATH2);
 ```
+bese on above code we declared the two action nodes and create the tree from xml file.
+then we need to write for loop to call attachMBFClient methd of each action node!!
+```
+    for( auto& node: tree.nodes)
+    {
+        if( auto gotopose = dynamic_cast<GoToPose*>( node.get() ))
+        {
+            gotopose->attachMBFClient(mbfclient);
+          //  std::cout<< AW<<"1\n";
+          //  std::cout<< dynamic_cast<GoToPose*>( node.get() )<<"1\n";
+
+        }
+
+        if( auto lookforobject = dynamic_cast<LookForObject*>( node.get() ))
+        {
+            lookforobject->attachMBFClient(mbfclient);
+           // std::cout<< AW<<"2\n";
+          //  std::cout<< dynamic_cast<LookForObject*>( node.get() )<<"1\n";
+
+        }
+
+    }
+```
