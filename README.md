@@ -89,3 +89,81 @@ the coordinate of locations will be write in the yamle file and like dictionary 
     YAML::Node locations = YAML::LoadFile(yaml_file);
     int num_locs = locations.size();
   ```
+After adding below headers to your main.cpp file:
+```
+#include <fstream>
+#include <ros/ros.h>
+#include <behaviortree_cpp_v3/bt_factory.h>
+#include <mbf_advanced/mbf_circle_client2.h>
+#include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
+```
+you need to create two action nodes as below:
+```
+using State = mbf_advanced::MBFCircleClientState;
+
+class GoToPose : public BT::SyncActionNode
+{
+public:
+    explicit GoToPose(const std::string& name)
+      : BT::SyncActionNode(name, {})
+      , mbfclient_{}
+    { }
+
+    void attachMBFClient(std::shared_ptr<mbf_advanced::MBFCircleClient> mbfclient)
+    {
+        mbfclient_ = mbfclient;
+    }
+
+    BT::NodeStatus tick() override
+    {
+        //ROS_INFO_STREAM("BT: " << this->name());
+
+        if (mbfclient_)
+        {
+
+            ROS_INFO_STREAM("BT: " << this->name());
+            auto r=mbfclient_->move_to_goal();
+           if (r->outcome  == mbf_msgs::MoveBaseResult::SUCCESS) {
+               return BT::NodeStatus::SUCCESS;
+           }
+
+            return BT::NodeStatus::FAILURE;
+        }
+
+        return BT::NodeStatus::FAILURE;
+    }
+
+private:
+    std::shared_ptr<mbf_advanced::MBFCircleClient> mbfclient_;
+};
+
+class LookForObject : public BT::SyncActionNode
+{
+public:
+    explicit LookForObject(const std::string& name)
+      : BT::SyncActionNode(name, {})
+      , mbfclient_{}
+    { }
+
+    void attachMBFClient(std::shared_ptr<mbf_advanced::MBFCircleClient> mbfclient)
+    {
+        mbfclient_ = mbfclient;
+    }
+
+    BT::NodeStatus tick() override
+    {
+        ROS_INFO_STREAM("BT: " << this->name());
+
+        if (mbfclient_)
+        {
+            ROS_INFO_STREAM("            welldone got to the next position!!        ");
+            return BT::NodeStatus::SUCCESS;
+        }
+
+        return BT::NodeStatus::FAILURE;
+    }
+
+private:
+    std::shared_ptr<mbf_advanced::MBFCircleClient> mbfclient_;
+};
+```
