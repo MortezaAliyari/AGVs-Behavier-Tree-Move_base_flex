@@ -202,3 +202,4 @@ then we need to write for loop to call attachMBFClient methd of each action node
 
     }
 ```
+If you run the launch file `groot_v1` you will see something like below video:
