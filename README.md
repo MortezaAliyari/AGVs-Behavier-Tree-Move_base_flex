@@ -180,7 +180,7 @@ inside the main function add below code:
     auto tree = factory.createTreeFromFile(BT_XML_PATH2);
 ```
 bese on above code we declared the two action nodes and create the tree from xml file. The path of XML file define as private variable inside CmakeList.txt `	BT_XML_PATH2="${PROJECT_SOURCE_DIR}/param/mbf_bt_v1.xml"`
-then we need to write for loop to call attachMBFClient methd of each action node!!
+then we need to write for loop to call attach MBFClient methd of each action node!!
 ```
     for( auto& node: tree.nodes)
     {
