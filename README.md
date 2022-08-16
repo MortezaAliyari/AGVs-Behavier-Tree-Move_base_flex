@@ -81,6 +81,14 @@ In order to cancel the broadcasting map frame id by gmapping node just replace t
 rostopic echo --filter "m.transforms[0].child_frame_id == 'odom'" /tf 
 ```
 using above command will show you whether map frame is changing or not. Map or Map_cm frame is parant frame for odom as child frame.
+inside the navigation launch file the below code should be comment:
+```
+  <!-- Turtlebot3 
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_remote.launch">
+    <arg name="model" value="$(arg model)" />
+  </include> -->
+```
+it will prevent to publish all robots frames for second time.
 ## Run MBF and BTC++ 
 Use [MBF](https://uos.github.io/mbf_docs/tutorials/beginner/basic_navigation/) tutorial. 
 rosdep install will fail for eband_local_planner, because the team hasn't released the version for noetic yet. Simply donwload and add eband_local_planner to your workspace in src folder.
