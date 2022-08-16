@@ -77,6 +77,10 @@ if you want to cancel the map frame broadcasting fron inside the amcl node you n
         
 ```
 In order to cancel the broadcasting map frame id by gmapping node just replace the `slam_gmapping.cpp` and its header `slam_gmapping.h` in your source file in your slam package.
+```
+rostopic echo --filter "m.transforms[0].child_frame_id == 'odom'" /tf 
+```
+using above command will show you whether map frame is changing or not.
 ## Run MBF and BTC++ 
 Use [MBF](https://uos.github.io/mbf_docs/tutorials/beginner/basic_navigation/) tutorial. 
 rosdep install will fail for eband_local_planner, because the team hasn't released the version for noetic yet. Simply donwload and add eband_local_planner to your workspace in src folder.
