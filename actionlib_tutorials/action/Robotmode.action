@@ -1,0 +1,17 @@
+#goal definition
+int32 order
+int32 gm
+int32 nav
+int32 nav_single
+int32 nav_file
+float64[] singledata
+string filename
+string singlename
+
+---
+#result definition
+int32[] sequence
+---
+#feedback
+int32[] sequence
+

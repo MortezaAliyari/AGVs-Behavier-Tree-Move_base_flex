@@ -1,0 +1,10 @@
+<launch>
+
+
+<node pkg="actionlib_tutorials" type="rtmode_client" name="rtmode_client" output="screen"/> 
+
+
+
+
+
+</launch>
