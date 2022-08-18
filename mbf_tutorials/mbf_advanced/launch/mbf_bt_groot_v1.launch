@@ -1,0 +1,30 @@
+<launch>
+
+<!-- Define parameters -->
+
+
+
+<!-- Run behavior tree visualization -->
+<node pkg="groot" type="Groot" name="groot" output="screen" args="--mode monitor"/>
+
+<!-- Run normal amcl and move base flex nodes -->
+ <include file="$(find mbf_advanced)/launch/amcl_demo_mbf_recovery.launch"/>
+ 
+<!-- timed_roslaunch used to add delay between groot and mbf_bt_v1 node-->
+ 
+    <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
+    args="5 mbf_advanced mbf_bt_v1.launch"
+    name="timed_roslaunch" output="screen" />
+  
+  
+<!-- Run BTC++ stack 
+<node pkg="mbf_advanced" type="mbf_bt_v1" name="mbf_bt_v1" output="screen"/> -->
+
+
+
+
+<!-- RVIZ -->
+ <include file="$(find mbf_beginner)/launch/rviz.launch"/>
+
+
+</launch>

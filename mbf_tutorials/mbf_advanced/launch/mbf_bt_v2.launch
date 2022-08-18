@@ -1,0 +1,10 @@
+<launch>
+
+
+<node pkg="mbf_advanced" type="mbf_single_mode" name="mbf_single_mode" output="screen"/> 
+
+
+
+
+
+</launch>

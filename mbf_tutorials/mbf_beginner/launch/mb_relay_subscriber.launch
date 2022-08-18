@@ -1,0 +1,6 @@
+<launch>
+  <!-- Move Base Flex -->
+  <include file="$(find mbf_beginner)/launch/mbf.launch"/>
+
+  <node name="move_base_relay" pkg="mbf_beginner" type="mb_relay_subscriber.py"/>
+</launch>
