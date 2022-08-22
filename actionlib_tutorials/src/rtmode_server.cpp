@@ -11,7 +11,11 @@ protected:
 
   ros::NodeHandle nh_;
   std_msgs::String Nav_CM_msg;
-  ros::Publisher Nav_CM_pub = nh_.advertise<std_msgs::String>("Nav_CM", 1);
+  std_msgs::String Navfilename_msg;
+
+  ros::Publisher Nav_CM_pub      = nh_.advertise<std_msgs::String>("Nav_CM", 1);
+  ros::Publisher Navfilename_pub = nh_.advertise<std_msgs::String>("Navfilename", 1);
+
   actionlib::SimpleActionServer<actionlib_tutorials::RobotmodeAction> as_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
   std::string action_name_;
   // create messages that are used to published feedback/result
@@ -19,7 +23,7 @@ protected:
   actionlib_tutorials::RobotmodeResult result_;
 
 public:
-  mbf_advanced::MBFCircleClient mbfclient;
+  mbf_rtmode::MBFCircleClient mbfclient;
   RobotmodeAction(std::string name) :
     as_(nh_, name, boost::bind(&RobotmodeAction::executeCB, this, _1), false),
     action_name_(name)
@@ -28,7 +32,7 @@ public:
     as_.start();
     ros::Duration(0.01).sleep();//without this delay ros doesn't publish Nav_CM_msg
     Nav_CM_pub.publish(Nav_CM_msg);
-    cout<<"///////////////////////////Change the navigation mode///////////////////////////"<<endl;
+    cout<<"////////////////////////////////////////////Change the navigation mode///////////////////////////"<<endl;
   }
 
   ~RobotmodeAction(void)
@@ -62,38 +66,39 @@ public:
     if (goal->nav==0 && goal->gm==1){
       Nav_CM_msg.data="ED";
       Nav_CM_pub.publish(Nav_CM_msg);
-      cout<<"///////////////////////////Gmapping is Enabled now control the robot! "<<endl;
+      cout<<"////////////////////////////////////////////Gmapping is Enabled now control the robot! "<<endl;
 
     }
     else if(goal->nav==1 && goal->gm==0){
       Nav_CM_msg.data="DE";
       Nav_CM_pub.publish(Nav_CM_msg);
-      cout<<"///////////////////////////Navigation is Enabled now select navigation mode! "<<endl;
+      cout<<"////////////////////////////////////////////Navigation is Enabled now select navigation mode! "<<endl;
       if(goal->nav_single==1 && goal->nav_file==0){
 
-        cout<<"///////////////////////////Single command is selected!"<<endl;
+        cout<<"////////////////////////////////////////////Single command is selected!"<<endl;
         float x=goal->singledata[0];
         float y=goal->singledata[1];
-        mbf_advanced::Quaternion q;
-        q=mbf_advanced::ToQuaternion(goal->singledata[2],0,0);
+        mbf_rtmode::Quaternion q;
+        q=mbf_rtmode::ToQuaternion(goal->singledata[2],0,0);
         mbfclient.move_to_goal(mbfclient.create_goal(x,y,0,q.x,q.y,q.z,q.w));
 
       }
       else if (goal->nav_single==0 && goal->nav_file==1) {
-
-        cout<<"///////////////////////////File command is selected!"<<endl;
+        Navfilename_msg.data=goal->singlename;
+        Navfilename_pub.publish(Navfilename_msg);
+        cout<<"////////////////////////////////////////////["<<goal->singlename.c_str()<<"] File is selected to navigate!"<<endl;
       }
       else {
-        cout<<"///////////////////////////Enable one of the modes: "<<
+        cout<<"////////////////////////////////////////////Enable one of the modes: "<<
             "signle  or file Navigation\n"<<
-            "///////////////////////////The defualt is single"<<endl;
+            "////////////////////////////////////////////The defualt is single"<<endl;
       }
 
     }
     else
-      cout<<"///////////////////////////Enable one of the modes: "<<
+      cout<<"////////////////////////////////////////////Enable one of the modes: "<<
           "Gmapping or Navigation\n"<<
-          "///////////////////////////The defualt is Navigation"<<endl;
+          "////////////////////////////////////////////The defualt is Navigation"<<endl;
 
     // start executing the action
     for(int i=1; i<=goal->order; i++)
