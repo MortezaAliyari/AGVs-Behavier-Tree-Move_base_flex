@@ -1,7 +1,7 @@
 <launch>
 
 
-<node pkg="mbf_advanced" type="mbf_single_mode" name="mbf_single_mode" output="screen"/> 
+<node pkg="mbf_advanced" type="mbf_bt_v2" name="mbf_bt_v2" output="screen"/> 
 
 
 
