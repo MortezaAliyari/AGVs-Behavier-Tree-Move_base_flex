@@ -7,27 +7,29 @@
 <!-- Run Gazebo World -->
 <include file="$(find turtlebot3_gazebo)/launch/turtlebot3_world.launch"/>
  
+ <!-- Run behavior tree visualization (Groot) -->
+<node pkg="groot" type="Groot" name="groot" output="screen" args="--mode monitor"/>
+
  <!-- Creating Map -->
 <include file="$(find gmapping)/launch/slam_gmapping_cleaner.launch"/>
 
 
 <!-- Run Robot Mode Server Action to recieve Commands through rosbridge -->
 <node pkg="actionlib_tutorials" type="rtmode_server" name="rtmode_server" output="screen"/> 
+      
+<!-- Run navigation launch file simultaneously -->
+<include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch"/> 
 
+
+
+<node pkg="mbf_advanced" type="mbf_bt_v2" name="mbf_bt_v2" output="screen"/> 
 
 <!-- timed_roslaunch used to add delay between rtmode_server and rtmode_client node -->
  
     <node pkg="timed_roslaunch" type="timed_roslaunch.sh"
     args="5 actionlib_tutorials rtmode_client.launch"
     name="timed_roslaunch" output="screen" /> 
-    
-      
-<!-- Run navigation launch file simultaneously -->
-<include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch"/>
 
   <!-- rviz -->
-
-<!--<node pkg="mbf_advanced" type="mbf_single_mode" name="mbf_single_mode" output="screen"/> -->
-
-<include file="$(find mbf_beginner)/launch/rviz.launch"/>
+<include file="$(find mbf_beginner)/launch/rviz.launch"/> 
 </launch>
