@@ -2,6 +2,7 @@
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <actionlib_tutorials/RobotmodeAction.h>
+#include <cmath>
 
 int main (int argc, char **argv)
 {
@@ -19,18 +20,18 @@ int main (int argc, char **argv)
   // send a goal to the action
   std::vector<float> single{0.5,-1.0, -1};
   actionlib_tutorials::RobotmodeGoal goal;
-  goal.order = 20;
+  goal.order = 15;
   goal.gm=0;
   goal.nav=1;
   goal.nav_single=0;
   goal.nav_file=1;
-  goal.singledata={0.5,-1.0, -1};
+  goal.singledata={0.5,-1,-1, 1.5,M_PI,M_PI, 0.5,1,-1, 5.5,M_PI,M_PI, 0.5,-1,-1}; //3*5
   goal.singlename="delay";
-  goal.filename="C";
+  goal.filename="B";
   ac.sendGoal(goal);
 
   //wait for the action to return
-  bool finished_before_timeout = ac.waitForResult(ros::Duration(30.0));
+  bool finished_before_timeout = ac.waitForResult(ros::Duration(200.0));
 
   if (finished_before_timeout)
   {
