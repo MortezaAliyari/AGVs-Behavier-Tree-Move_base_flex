@@ -22,11 +22,11 @@ int main (int argc, char **argv)
   goal.order = 20;
   goal.gm=0;
   goal.nav=1;
-  goal.nav_single=1;
-  goal.nav_file=0;
+  goal.nav_single=0;
+  goal.nav_file=1;
   goal.singledata={0.5,-1.0, -1};
   goal.singlename="delay";
-  goal.filename="A1";
+  goal.filename="C";
   ac.sendGoal(goal);
 
   //wait for the action to return
