@@ -216,5 +216,14 @@ then we need to write for loop to call attach MBFClient methd of each action nod
 ```
 If you run the launch file `groot_v1` you will see something like this [Video](https://uos.github.io/mbf_docs/installation/) :
 
-##Add VNC server to robot Ubuntu
-
+## Add VNC server to robot Ubuntu
+Run below commands on robot side:
+```
+sudo apt update
+```
+then install lightdm and x11vnc:
+```
+sudo apt install lightdm
+sudo reboot
+sudo apt install x11vnc
+```
