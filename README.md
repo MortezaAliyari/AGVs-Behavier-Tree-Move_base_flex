@@ -215,3 +215,6 @@ then we need to write for loop to call attach MBFClient methd of each action nod
     }
 ```
 If you run the launch file `groot_v1` you will see something like this [Video](https://uos.github.io/mbf_docs/installation/) :
+
+##Add VNC server to robot Ubuntu
+
