@@ -256,5 +256,5 @@ systemctl start x11vnc.service
 Then you need to check the service status:
 ```
 systemctl status x11vnc.service
-
 ```
+you should see the green spot on your teminal not red! Then open Remmina on your Ubuntu and use Quick access (empty box). Enter the ip of your robot and now should be able to see desktop of robot os.
