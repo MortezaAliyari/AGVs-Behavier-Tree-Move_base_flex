@@ -30,6 +30,13 @@ actually began in the videogame industry to define behaviors for non-player char
 sudo apt-get install ros-$ROS_DISTRO-behaviortree-cpp-v3 
 ```
 ### Install Groot as on Linux follows:
+before installing the groot, you should install Qtcrerator and some packages:
+```
+
+
+```
+
+
 ```
    git clone https://github.com/BehaviorTree/Groot.git
    cd Groot
