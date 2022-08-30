@@ -32,7 +32,10 @@ sudo apt-get install ros-$ROS_DISTRO-behaviortree-cpp-v3
 ### Install Groot as on Linux follows:
 before installing the groot, you should install Qtcrerator and some packages:
 ```
-
+sudo apt update
+sudo apt install libqt5svg5-dev
+sudo apt install build-essential
+sudo apt install qtcreator -y
 
 ```
 
@@ -56,7 +59,7 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
    ```
    open `CmakeLists.txt` remove the line `find_package(ament_index_cpp REQUIRED)` and continue:
    ```
-   rosdep install --from-paths src --ignore-src
+   rosdep install --from-paths src --ignore-src (optional)
    catkin_make  
    ```
    it should work now.
