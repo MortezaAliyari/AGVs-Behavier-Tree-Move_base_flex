@@ -195,7 +195,8 @@ public:
           }
           else if (fbnfr)
           {//send feedback to rtmode client
-            feedback_.scenario.append(NavfileResults);
+            ROS_INFO("[%s]",NavfileResults);
+            feedback_.scenario=NavfileResults;
             asrtmode_.publishFeedback(feedback_);
             fbnfr=false;
             ROS_INFO("fbnfr");
