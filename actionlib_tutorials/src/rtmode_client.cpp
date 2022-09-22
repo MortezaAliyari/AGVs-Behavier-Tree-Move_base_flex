@@ -23,13 +23,15 @@ int main (int argc, char **argv)
   goal.order = 15;
   goal.gm=0;
   goal.nav=1;
-  goal.nav_single=0;
-  goal.nav_file=1;
+  goal.nav_single=1;
+  goal.nav_file=0;
   goal.singledata={0.5,-1,-1, 1.5,M_PI,M_PI, 0.5,1,-1, 5.5,M_PI,M_PI, 0.5,-1,-1}; //3*5
   goal.singlename="delay";
   goal.filename="B";
   ac.sendGoal(goal);
-
+  ros::Duration(5.0).sleep();
+  ac.cancelAllGoals();
+  //ac.cancelGoal();
   //wait for the action to return
   bool finished_before_timeout = ac.waitForResult(ros::Duration(200.0));
 
@@ -39,8 +41,8 @@ int main (int argc, char **argv)
     ROS_INFO("Action finished: %s",state.toString().c_str());
   }
   else
-    ROS_INFO("Action did not finish before the time out.");
-
+    ROS_INFO("Rtmode Action did not finish before the time out.");
+  ROS_INFO("Robot should be stopped!");
   //exit
   return 0;
 }
