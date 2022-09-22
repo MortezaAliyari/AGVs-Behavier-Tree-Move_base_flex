@@ -16,7 +16,7 @@ protected:
 
   ros::Publisher Nav_CM_pub      = nh_.advertise<std_msgs::String>("Nav_CM", 1);
   ros::Publisher Navfilename_pub = nh_.advertise<std_msgs::String>("Navfilename", 1);
-
+  ros::Subscriber NavfileResults_sub=nh_.subscribe("NavfileResults", 10,&RobotmodeAction::NavfileResults_Callback,this); //new format of subscribing topic in constructer function of a class;
 
   actionlib::SimpleActionServer<actionlib_tutorials::RobotmodeAction> asrtmode_; // NodeHandle instance must be created before this line. Otherwise strange error occurs.
 //  actionlib::SimpleActionClient<mbf_msgs::MoveBaseAction> acmbfnavfile_;
@@ -30,8 +30,6 @@ public:
   mbf_rtmode::MBFCircleClient mbfclient_Navsingle; //relate to receiving feedback when running single commands
   //mbf_advanced::MBFCircleClient mbfclient_Navfile; //relate to receiving feedback when running scenario or Navigation file
   bool nfr=false,fbnfr=false,sfbnfr=false,ffbnfr=false;
-  ros::NodeHandle n;
-  ros::Subscriber NavfileResults_sub=n.subscribe("NavfileResults", 10,&RobotmodeAction::NavfileResults_Callback,this); //new format of subscribing topic in constructer function of a class;
 
   string NavfileResults;
 
@@ -79,8 +77,9 @@ public:
     Nav_CM_msg.data="DE";
 
     asrtmode_.start();
-    ros::Duration(0.01).sleep();//without this delay ros doesn't publish Nav_CM_msg
-    Nav_CM_pub.publish(Nav_CM_msg);
+    ros::Duration(0.1).sleep();//without this delay ros doesn't publish Nav_CM_msg
+    for (int i=0;i<5;i++)
+      Nav_CM_pub.publish(Nav_CM_msg);
     ROS_INFO("Robot is waiting for Client request!");
   }
 
@@ -94,7 +93,6 @@ public:
     ros::Rate r(1);
     bool success = true;
 
-
     feedback_.targetpoint.clear();
     feedback_.scenario.clear();
 
@@ -102,13 +100,11 @@ public:
 
     // publish info to the console for the user
     ROS_INFO("Action messge is as below: ");
+    ROS_INFO("                          order value is %d",goal->order);
     ROS_INFO("                          Gmapping value is %d",goal->gm);
     ROS_INFO("                          Navigation value is %d",goal->nav);
-
     ROS_INFO("                          Single Navigation value is %d",goal->nav_single);
-
     ROS_INFO("                          File   Navigation value is %d",goal->nav_file);
-
     ROS_INFO("                          Single command value is %f",goal->singledata[1]);
     ROS_INFO("                          Single task name is %s",goal->singlename.c_str());
     ROS_INFO("                          navigation file name is %s",goal->filename.c_str());
@@ -121,13 +117,12 @@ public:
     {
       Nav_CM_msg.data="DE";
       Nav_CM_pub.publish(Nav_CM_msg);
-      ROS_INFO("Navigation is Enabled");
+      ROS_WARN("Navigation is Enabled!");
       if(goal->nav_single==1 && goal->nav_file==0){
         ROS_INFO("Single command is selected");
         int arrSize=goal->order;
         ROS_INFO("Number of single commands is : %d",arrSize);
-        for (int i=0;i<arrSize;i=i+3) {
-         // cout<<M_PI<<" =? "<<goal->singledata[1+i]<<endl;
+        for (int i=0;i<arrSize;i=i+3) {// loop started
 
           if (goal->singledata[1+i]+goal->singledata[2+i]==M_PI+M_PI){
             ROS_INFO("Robot sleeped for [%f] second",goal->singledata[i]);
@@ -158,9 +153,10 @@ public:
             {
               ROS_INFO("%s  server: Preempted or cancelled", action_name_.c_str());
               ROS_INFO("MBF server: Preempted or cancelled");
-
+              feedback_.targetpoint=" User Cancelled the NavSingle Mode! ";
+              asrtmode_.publishFeedback(feedback_);
               // set the action state to preempted
-              asrtmode_.setPreempted();
+              asrtmode_.setAborted();
               mbfclient_Navsingle.acmbf_.cancelAllGoals();
               success = false;
               break;
@@ -176,7 +172,7 @@ public:
         while(1)
         {
           ROS_INFO("waiting for result of File navigation mode!");
-          while(!nfr); //stup untile receive result from MBF action
+          while(!nfr); //stop untile receive result from MBF action
           nfr=false;
           if(sfbnfr)
           {// send successful result to rtmode client
@@ -207,15 +203,25 @@ public:
             fbnfr=false;
 
           }
-        }
+          if (asrtmode_.isPreemptRequested() || !ros::ok())
+          {
+            ROS_INFO("%s  server: Preempted or cancelled", action_name_.c_str());
+            ROS_INFO("MBF server: Preempted or cancelled");
 
+            // set the action state to preempted
+            asrtmode_.setAborted();
+            Navfilename_msg.data="cancellallgoals";
+            Navfilename_pub.publish(Navfilename_msg);
+            success = false;
+            break;
+          }
+        }
       }
       else {
           ROS_INFO("Enable one of the modes:");
-          ROS_INFO("                        signle  or file Navigation");
+          ROS_INFO("                        signle or file Navigation");
           ROS_INFO("                        The defualt is single");
       }
-
     }
     else{
         ROS_INFO("Enable one of the modes:");
@@ -235,7 +241,6 @@ public:
       asrtmode_.setAborted(result_);
     }
   }
-
 };
 
 
