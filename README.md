@@ -63,8 +63,16 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
    rosdep install --from-paths src --ignore-src (optional)
    catkin_make  
    ```
-   it should work now.
+   
    To present the tree on groot you need to add header file and publish the tree to from behaviour tree node file to groot software.
+   ```
+   #include "behaviortree_cpp_v3/loggers/bt_zmq_publisher.h"
+   ```
+   and below line to befor tickroot function.
+   ```
+    BT::PublisherZMQ publisher_zmq(tree);
+   ```
+   it should work now.
    ```
    rosrun groot Groot
    ```
