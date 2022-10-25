@@ -22,7 +22,7 @@ You can see the video: &nbsp;&nbsp;
 ```
 sudo apt install ros-noetic-move-base-flex
 ```
-You need to clone the 'eplan_localo_planner' from its github and add it to your catin_workspace.
+You need to clone the 'eplan_local_planner' from its github and add it to your catin_workspace.
 ## Behavior Tree 
 [Behavior Trees](https://github.com/BehaviorTree/BehaviorTree.CPP)
 actually began in the videogame industry to define behaviors for non-player characters (NPCs): Both Unreal Engine and Unity (two major forces in this space) have dedicated tools for authoring BTs. This is no surprise; a big advantage of BTs is that they are easy to compose and modify, even at runtime. However, this sacrifices the ease of designing reactive behaviors (for example, mode switches) compared to some of the other abstractions, as you will see later in this repo.
@@ -65,7 +65,9 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
    ```
    it should work now.
    To present the tree on groot you need to add header file and publish the tree to from behaviour tree node file to groot software.
-   
+   ```
+   rosrun groot Groot
+   ```
 ## Run SLAM and Navigation algorithms simultaneously for turtlebot3.
 If we be able to run both algorithms to execute independently, we wouldn't need to kill any node during the transition from navigation to creating the map method.
 It seems we should download the source file of each algorithm as a package and install them on our catkin workspace.
