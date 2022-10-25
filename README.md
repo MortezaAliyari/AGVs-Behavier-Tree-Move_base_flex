@@ -63,6 +63,8 @@ You are not allow to built on source so change the path`  cd depend/BehvaiorTree
    catkin_make  
    ```
    it should work now.
+   To present the tree on groot you need to add header file and publish the tree to from behaviour tree node file to groot software.
+   
 ## Run SLAM and Navigation algorithms simultaneously for turtlebot3.
 If we be able to run both algorithms to execute independently, we wouldn't need to kill any node during the transition from navigation to creating the map method.
 It seems we should download the source file of each algorithm as a package and install them on our catkin workspace.
