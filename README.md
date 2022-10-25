@@ -22,6 +22,7 @@ You can see the video: &nbsp;&nbsp;
 ```
 sudo apt install ros-noetic-move-base-flex
 ```
+You need to clone the 'eplan_localo_planner' from its github and add it to your catin_workspace.
 ## Behavior Tree 
 [Behavior Trees](https://github.com/BehaviorTree/BehaviorTree.CPP)
 actually began in the videogame industry to define behaviors for non-player characters (NPCs): Both Unreal Engine and Unity (two major forces in this space) have dedicated tools for authoring BTs. This is no surprise; a big advantage of BTs is that they are easy to compose and modify, even at runtime. However, this sacrifices the ease of designing reactive behaviors (for example, mode switches) compared to some of the other abstractions, as you will see later in this repo.
